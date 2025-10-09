@@ -1,0 +1,75 @@
+.site-footer {
+  box-shadow: 0 0 10px var(--color-gray);
+	min-width: 100%;
+	width: fit-content;
+}
+
+.footer-content {
+	max-width: 64rem;
+	margin: auto;
+	padding: 2rem 4rem;
+}
+
+.footer-sections {
+   display: flex;
+	 justify-content: space-between;
+	 flex-wrap: wrap;
+	 gap: 2rem;
+}
+
+.footer-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.footer-nav a {
+  color: var(--color-black);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease-in-out;
+	margin-bottom: 1rem;
+}
+
+.footer-header {
+  font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.divider {
+	border: none;
+	height: 1px;
+	width: 100%;
+	background: var(--color-gray);
+	margin: 2rem auto;
+}
+
+.copyright {
+	text-align: end;
+	padding: 0;
+	margin: 0;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-ivory);
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--color-ivory);
+	background-color: var(--color-black);
+}
+
+.social-icon:hover {
+  border-color: var(--color-black); /* LinkedIn blue highlight on hover */
+  color: var(--color-black); /* icon color changes on hover */
+	background-color: var(--color-ivory);
+}
+
+.social-icon:active {
+  transform: scale(0.75);
+}

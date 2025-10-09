@@ -1,0 +1,121 @@
+.app {
+  background-color: var(--color-ivory);
+}
+
+.home-content {
+	padding-top: 7rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	overflow-x: auto;
+}
+
+.keys {
+	display: flex;
+	gap: clamp(12.5px, 2vh, 25px);
+	position: relative;
+}
+
+.c-key {
+	position: relative;
+}
+
+.d-key {
+	position: relative;
+}
+
+.e-key {
+	position: relative;
+}
+
+.c-key-container {
+	width: 30vh;
+  height: 90vh;
+  clip-path: polygon(0% 0, 30% 0, 30% 52%, 100% 52%, 100% 100%, 0% 100%);
+}
+
+.d-key-container {
+  width: 30vh;
+  height: 90vh;
+  clip-path: polygon(35% 0%, 65% 0%, 65% 52%, 100% 52%, 100% 100%, 0% 100%, 0% 52%, 35% 52%);
+}
+
+.e-key-container {
+  width: 30vh;
+  height: 90vh;
+  clip-path: polygon(0% 52%, 70% 52%, 70% 0%, 100% 0%, 100% 52%, 100% 100%, 0% 100%);
+}
+
+.c-key-border {
+	width: auto;
+	height: clamp(500px, 80vh, 1000px);
+}
+
+.d-key-border {
+	width: auto;
+	height: clamp(500px, 80vh, 1000px);
+}
+
+.e-key-border {
+	width: auto;
+	height: clamp(500px, 80vh, 1000px);
+}
+
+.white-key-animations polygon {
+	transform: translateY(0);
+	transition: transform 0.25s ease, filter 0.25s ease;
+	cursor: pointer;
+}
+
+.white-key-animations polygon:hover {
+	filter: url(#shadow-hover);
+	transform: translateY(-1%);
+}
+
+.white-key-animations polygon:active {
+  transform: translateY(1%);
+  filter: url(#shadow);
+}
+
+.c-sharp {
+	position: absolute;
+	top: 0;
+	left: clamp(59px, 9.5vh, 119px);
+}
+
+.c-sharp-container {
+	background-color: var(--color-black);
+	width: clamp(167px, 27vh, 333px);
+	height: clamp(250px, 40vh, 500px);
+}
+
+.e-flat {
+	position: absolute;
+	top: 0;
+	right: clamp(59px, 9.5vh, 119px);
+}
+
+.e-flat-container {
+	background-color: var(--color-black);
+	width: clamp(167px, 27vh, 333px);
+	height: clamp(250px, 40vh, 500px);
+}
+
+.black-key-animations {
+	box-shadow: 0 0 25px var(--color-gray);
+	transform: translateY(0);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	cursor: pointer;
+}
+
+.black-key-animations:hover {
+	box-shadow: 0 0 25px var(--color-black);
+	transform: translateY(-2%);
+}
+
+.black-key-animations:active {
+	box-shadow: 0 0 25px var(--color-gray);
+	transform: translateY(2%)
+}

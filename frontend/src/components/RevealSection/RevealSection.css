@@ -1,0 +1,19 @@
+.reveal-up.visible,
+.reveal-down.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(10rem);
+  transition: opacity 1.5s ease, transform 1s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-down {
+  opacity: 0;
+  transform: translateY(-10rem); 
+  transition: opacity 1.5s ease, transform 1s ease;
+  will-change: opacity, transform;
+}
