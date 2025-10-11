@@ -8,21 +8,11 @@ export default function RevealSection({ children, delay = 0, direction = "up" })
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.style.transitionDelay = `${delay}s`;
-            el.classList.add("visible");
-            observer.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const timeout = setTimeout(() => {
+      el.classList.add("visible");
+    }, delay * 1000);
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    return () => clearTimeout(timeout);
   }, [delay]);
 
   const revealClass = direction === "up" ? "reveal-up" : "reveal-down";

@@ -1,5 +1,7 @@
 import SubscribeSubmit from "../SubscribeSubmit/SubscribeSubmit";
-import { Linkedin } from 'lucide-react';
+import { FaLinkedinIn } from "react-icons/fa";
+import { FiGithub } from "react-icons/fi";
+import { AiOutlineSpotify } from "react-icons/ai";
 import "./Footer.css";
 
 export default function Footer() {
@@ -8,21 +10,32 @@ export default function Footer() {
 				<div class="footer-content">
 					<div class="footer-sections">
 						<div class="footer-branding">
-							<p class="footer-header">Sean Cheng</p>
+							<h1 class="footer-header">Sean Cheng</h1>
 							<p>United States</p>
 							<p>email@email.com</p>
-							<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-icon">
-								<Linkedin/>
-							</a>
+							<div class="icons">
+								<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-icon">
+									<FaLinkedinIn size={20}/>
+								</a>
+								<a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="social-icon">
+									<FiGithub size={20}/>
+								</a>
+								<a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" class="social-icon">
+									<AiOutlineSpotify size={25}/>
+								</a>
+							</div>
 						</div>
 						<nav class="footer-nav">
-							<p class="footer-header">Quick Links</p>
-							<a class="underline-animate" href="/">Home</a>
-							<a class="underline-animate" href="/about">About</a>
-							<a class="underline-animate" href="/blog">Blog</a>
+							<h1 class="footer-header">Quick Links</h1>
+							<a class="underline-animate" href="/#">The Foyer</a>
+							<a class="underline-animate" href="/about">Program Notes</a>
+							<a class="underline-animate" href="/blog">Romantic Reveries</a>
+							<a class="underline-animate" href="/blog">Limelight Letters</a>
+							<a class="underline-animate" href="/">Repertoire</a>
+							<a class="underline-animate" href="/">Postlude</a>
 						</nav>
 						<div class="subscribe">
-							<p class="footer-header">Subscribe</p>
+							<h1 class="footer-header">Subscribe</h1>
 							<SubscribeSubmit/>
 						</div>
 					</div>

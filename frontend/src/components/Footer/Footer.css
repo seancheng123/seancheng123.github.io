@@ -11,10 +11,10 @@
 }
 
 .footer-sections {
-   display: flex;
-	 justify-content: space-between;
-	 flex-wrap: wrap;
-	 gap: 2rem;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 3rem;
 }
 
 .footer-nav {
@@ -33,7 +33,7 @@
 
 .footer-header {
   font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 2rem;
 }
 
 .divider {
@@ -48,6 +48,11 @@
 	text-align: end;
 	padding: 0;
 	margin: 0;
+}
+
+.icons {
+	display: flex;
+	gap: 0.5rem;
 }
 
 .social-icon {
@@ -65,8 +70,8 @@
 }
 
 .social-icon:hover {
-  border-color: var(--color-black); /* LinkedIn blue highlight on hover */
-  color: var(--color-black); /* icon color changes on hover */
+  border-color: var(--color-black); 
+  color: var(--color-black);
 	background-color: var(--color-ivory);
 }
 
