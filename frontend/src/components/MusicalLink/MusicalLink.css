@@ -1,0 +1,35 @@
+.musical-link {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.floating-note {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  transform-origin: center;
+  animation: floatNote var(--duration, 2s) ease-out forwards;
+}
+
+.sway-wrapper {
+  display: inline-block;
+  animation: sway 1s ease-in-out infinite alternate;
+}
+
+@keyframes floatNote {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0);
+    opacity: 1.5;
+  }
+  100% {
+    transform: translateY(-4rem) translateX(var(--drift-x)) rotate(var(--rotate));
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(1rem); }
+}

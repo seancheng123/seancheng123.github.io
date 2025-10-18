@@ -1,0 +1,10 @@
+.tag {
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	border: solid 1.5px var(--color-black);
+	border-radius: 20px;
+    font-family: 'Nepomuk', serif;
+	font-style: italic;
+    width: auto;
+    align-self: flex-start;
+}

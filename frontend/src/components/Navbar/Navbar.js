@@ -1,5 +1,6 @@
 import "./Navbar.css";
 import { useState } from 'react';
+import MusicalLink from "../../components/MusicalLink/MusicalLink";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <a className="logo underline-animate" href="/#">Sean Cheng</a>
+      <MusicalLink className="logo animate-link" href="/">sean cheng</MusicalLink>
       <button
         className={`hamburger ${isOpen ? "open" : ""}`}
         onClick={toggleMenu}
@@ -21,12 +22,12 @@ export default function Navbar() {
       </button>
 
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-        <li><a class="underline-animate" href="/">The Foyer</a></li>
-        <li><a class="underline-animate" href="/about">Program Notes</a></li>
-        <li><a class="underline-animate" href="/blog">Romantic Reveries</a></li>
-        <li><a class="underline-animate" href="/archive">Limelight Letters</a></li>
-        <li><a class="underline-animate" href="/archive">Repertoire</a></li>
-        <li><a class="underline-animate" href="/archive">Postlude</a></li>
+        <li><MusicalLink className="animate-link" href="/">The Foyer</MusicalLink></li>
+        <li><MusicalLink className="animate-link" href="/notes">Program Notes</MusicalLink></li>
+        <li><MusicalLink className="animate-link" href="/reveries">Romantic Reveries</MusicalLink></li>
+        <li><MusicalLink className="animate-link" href="/letters">Limelight Letters</MusicalLink></li>
+        <li><MusicalLink className="animate-link" href="/repertoire">Repertoire</MusicalLink></li>
+        <li><MusicalLink className="animate-link" href="/postlude">Postlude</MusicalLink></li>
       </ul>
     </nav>
   );

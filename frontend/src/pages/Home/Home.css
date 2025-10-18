@@ -1,14 +1,19 @@
 .home-content {
 	padding-top: 7rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	padding-bottom: 5rem;
+	padding-bottom: 2rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	overflow-x: hidden;
 	overflow-y: hidden;
 	gap: max(2vh, 11px);
+}
+
+.home-content p {
+	font-family: 'Nepomuk', serif;
+	letter-spacing: 0.05rem;
 }
 
 .keys {
@@ -31,9 +36,7 @@
 
 	.home-content {
 		justify-content: space-evenly;
-		padding-left: 5rem;
-		padding-right: 5rem;
-		overflow-x: scroll;
+		overflow-x: auto;
 	}
 }
 
@@ -80,15 +83,15 @@
 
 .white-key-animations p {
 	position: absolute;
-  bottom: 1%;
+  bottom: 2%;
   right: 5%;
 	pointer-events: none;
-	font-size: 1.25rem;
+	font-size: 1.5rem;
 	text-align: right;
 	transition: transform 0.25s ease, filter 0.25s ease;
 	transform: translateY(0);
 	user-select: none;
-	max-width: 66%;
+	max-width: 75%;
 }
 
 .white-key-animations:hover {
@@ -110,6 +113,9 @@
 .white-key-animations polygon:active {
   filter: url(#shadow);
 }
+
+
+
 
 /* Black Keys */
 
@@ -157,21 +163,21 @@
 
 .black-key-container p {
 	position: absolute;
-  bottom: 1%;
+  bottom: 4%;
   right: 5%;
 	pointer-events: none;
-	font-size: 1.25rem;
+	font-size: 1.5rem;
 	text-align: right;
 	user-select: none;
-	max-width: 66%;
+	max-width: 75%;
 }
 
 .bg-black-key {
 	background: linear-gradient(
-    145deg,        /* angled gradient for modern lighting */
-    #2A2A2A 0%,    /* subtle top highlight */
-    #1A1A1A 50%,   /* your main black */
-    #121212 100%   /* subtle bottom shadow */
+    145deg,
+    #2A2A2A 0%,
+    #1A1A1A 50%,
+    #121212 100%
   );
 	opacity: 0.4;
 	width: max(27vh, 152px);
@@ -203,6 +209,7 @@
   stroke: var(--color-ivory);
 	fill: none;
 	overflow: visible;
+	pointer-events: none;
 }
 
 .quill-icon {
@@ -215,6 +222,7 @@
   stroke: var(--color-black);
 	fill: none;
 	overflow: visible;
+	pointer-events: none;
 }
 
 .books-icon {
@@ -227,6 +235,7 @@
   stroke: var(--color-black);
 	fill: none;
 	overflow: visible;
+	pointer-events: none;
 }
 
 .rose-icon {
@@ -236,6 +245,7 @@
   stroke: var(--color-ivory);
 	fill: none;
 	overflow: visible;
+	pointer-events: none;
 }
 
 .candle-icon {
@@ -248,6 +258,7 @@
   stroke: var(--color-black);
 	fill: none;
 	overflow: visible;
+	pointer-events: none;
 }
 
 .stage-icon path {

@@ -1,0 +1,16 @@
+.animated-line-container {
+  width: 100%;
+  height: 1px;
+  overflow: hidden;
+}
+
+.animated-line {
+  height: 100%;
+  width: 0%;
+  background-color: var(--color-gray);
+  transition: width 1s ease-in-out;
+}
+
+.line-visible {
+  width: 100%;
+}

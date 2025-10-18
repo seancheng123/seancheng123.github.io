@@ -7,13 +7,11 @@
 .reveal-up {
   opacity: 0;
   transform: translateY(50%);
-  transition: opacity 2s ease-in, transform 2s ease-out;
   will-change: opacity, transform;
 }
 
 .reveal-down {
   opacity: 0;
   transform: translateY(-50%); 
-  transition: opacity 2s ease-in, transform 2s ease-out;
   will-change: opacity, transform;
 }
