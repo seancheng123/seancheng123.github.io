@@ -8,18 +8,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
   z-index: 9999;
 }
 
-.loading-screen.fade-out {
-  opacity: 0;
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
 
 @keyframes scaleIn {
   to { transform: scale(1); }
@@ -41,12 +32,12 @@
 }
 
 .rest {
-  width: 10vw;
+  width: 8vw;
   height: auto;
 }
 
 .fermata {
-  width: 5vw;
+  width: 4vw;
   height: auto;
 }
 
@@ -64,8 +55,8 @@
   position: absolute;
   top: -2.5;
   left: -2.5;
-  width: 20vw;
-  height: 20vw;
+  width: 16vw;
+  height: 16vw;
   border-right: 0.25vw solid var(--color-black);
   border-bottom: 0.5vw solid var(--color-black);
   border-left: 0.75vw solid var(--color-black);

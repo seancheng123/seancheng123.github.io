@@ -1,0 +1,28 @@
+.animated-key {
+  transform: translateY(-100vh);
+  will-change: transform;
+    pointer-events: none;
+}
+
+.animated-key > * {
+  pointer-events: auto;
+}
+
+.animated-key.visible {
+  animation: dropAndSettle 2s ease-in-out forwards;
+}
+
+@keyframes dropAndSettle {
+  0% {
+    transform: translateY(-100vh);
+  }
+  50% {
+    transform: translateY(10%);
+  }
+  75% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

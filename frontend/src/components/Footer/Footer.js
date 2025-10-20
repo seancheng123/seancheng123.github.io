@@ -28,12 +28,12 @@ export default function Footer() {
 						</div>
 						<nav className="footer-nav">
 							<h1>Quick Links</h1>
-							<MusicalLink className="animate-link" href="/">The Foyer</MusicalLink>
-							<MusicalLink className="animate-link" href="/notes">Program Notes</MusicalLink>
-							<MusicalLink className="animate-link" href="/reveries">Romantic Reveries</MusicalLink>
-							<MusicalLink className="animate-link" href="/letters">Limelight Letters</MusicalLink>
-							<MusicalLink className="animate-link" href="/repertoire">Repertoire</MusicalLink>
-							<MusicalLink className="animate-link" href="/postlude">Postlude</MusicalLink>
+							<MusicalLink className="underline-animate" href="/">The Foyer</MusicalLink>
+							<MusicalLink className="underline-animate" href="/notes">Program Notes</MusicalLink>
+							<MusicalLink className="underline-animate" href="/reveries">Romantic Reveries</MusicalLink>
+							<MusicalLink className="underline-animate" href="/letters">Limelight Letters</MusicalLink>
+							<MusicalLink className="underline-animate" href="/repertoire">Repertoire</MusicalLink>
+							<MusicalLink className="underline-animate" href="/postlude">Postlude</MusicalLink>
 						</nav>
 						<div className="subscribe">
 							<h1>Subscribe</h1>
