@@ -1,20 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.136f61d1.css",
-    "main.js": "/static/js/main.e69a8296.js",
+    "main.css": "/static/css/main.b14a8247.css",
+    "main.js": "/static/js/main.67c304da.js",
     "static/js/453.d7446e4a.chunk.js": "/static/js/453.d7446e4a.chunk.js",
+    "static/media/background-piano.jpg": "/static/media/background-piano.1439ad8f25de5eb3fd36.jpg",
+    "static/media/carnegie.jpg": "/static/media/carnegie.20ab7393a95f5caec3dd.jpg",
+    "static/media/rest.png": "/static/media/rest.86576046a3ca822e872c.png",
+    "static/media/Nepomuk-Regular.otf": "/static/media/Nepomuk-Regular.a172fdfbb106b8054755.otf",
+    "static/media/Nepomuk-Bold.otf": "/static/media/Nepomuk-Bold.0f0dcaca00a785c44819.otf",
+    "static/media/Nepomuk-Italic.otf": "/static/media/Nepomuk-Italic.76a45c40b10aad0faffc.otf",
     "static/media/stage.svg": "/static/media/stage.4fcf6200bdecdcf4aa83379a90446317.svg",
     "static/media/books.svg": "/static/media/books.fb7259850c1339d940bd795c33ccd3bc.svg",
     "static/media/rose.svg": "/static/media/rose.be6d326f851938b9da587b10891768ae.svg",
     "static/media/candle.svg": "/static/media/candle.7e5a3a21e30ba414afe67c87df8e4aaa.svg",
     "static/media/quill.svg": "/static/media/quill.7a93941a733a5aee86f244d8c8acd4cc.svg",
     "index.html": "/index.html",
-    "main.136f61d1.css.map": "/static/css/main.136f61d1.css.map",
-    "main.e69a8296.js.map": "/static/js/main.e69a8296.js.map",
+    "main.b14a8247.css.map": "/static/css/main.b14a8247.css.map",
+    "main.67c304da.js.map": "/static/js/main.67c304da.js.map",
     "453.d7446e4a.chunk.js.map": "/static/js/453.d7446e4a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.136f61d1.css",
-    "static/js/main.e69a8296.js"
+    "static/css/main.b14a8247.css",
+    "static/js/main.67c304da.js"
   ]
 }
