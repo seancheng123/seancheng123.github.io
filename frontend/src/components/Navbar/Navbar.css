@@ -13,6 +13,12 @@
   align-items: center;
   opacity: 0.95;
   top: 0;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.navbar.visible {
+  transform: translateY(0);
 }
 
 .logo {

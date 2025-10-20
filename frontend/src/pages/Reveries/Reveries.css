@@ -1,7 +1,9 @@
 .reveries {
-	padding: 7rem 0rem;
+	padding-top:2rem;
+	padding-bottom: 4rem;
 	margin: auto;
 	max-width: 100rem;
+	min-height: 100vh;
 }
 
 .header {
