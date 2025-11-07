@@ -1,3 +1,106 @@
-.repertoire {
-    padding-top: 7rem;
+.repertoire-page {
+  background: var(--color-ivory);
+  color: var(--color-black);
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.repertoire-page > h1 {
+  font-size: 3rem;
+  letter-spacing: 0.5rem;
+}
+
+.repertoire-page > p {
+  color: var(--color-muted);
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.playlists-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 100rem;
+}
+
+.playlist-card {
+  background: white;
+  box-shadow: 0 0 50px var(--color-gray-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.playlist-desc {
+  color: var(--color-gray);
+  margin-bottom: 1rem;
+}
+
+.song-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: background-color 0.25s ease;
+  cursor: default;
+  gap: 1rem;
+}
+
+.song-item:hover {
+  background: var(--color-gray-light);
+}
+
+.song-item:hover p {
+  color: var(--color-black);
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.song-title {
+  font-size: 1rem;
+  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  margin-bottom: 0.25rem;
+}
+
+.song-date {
+  font-size: 0.75rem;
+  color: var(--color-gray);
+}
+
+.song-link {
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-gray);
+  border: none;
+}
+
+.song-link:hover {
+  border: none;
 }

@@ -1,0 +1,103 @@
+.postlude-page {
+  background: var(--color-ivory);
+  color: var(--color-black);
+  min-height: 100vh;
+  padding: 4rem 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.postlude-header {
+  text-align: center;
+  max-width: 700px;
+}
+
+.postlude-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.postlude-subtitle {
+  color: var(--color-gray);
+  font-size: 1.1rem;
+}
+
+.acknowledgements,
+.subscribe-section,
+.contact-section {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.acknowledgements ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  color: var(--color-gray);
+}
+
+.acknowledgements li {
+  margin: 0.25rem 0;
+}
+
+.subscribe-section p {
+  color: var(--color-gray);
+  margin-bottom: 1rem;
+}
+
+.subscribe-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.subscribe-input {
+  border: 1px solid var(--color-gray-light);
+  border-radius: 2rem;
+  padding: 0.6rem 1rem;
+  width: 250px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.subscribe-input:focus {
+  border-color: var(--color-black);
+}
+
+.subscribe-btn {
+  background: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.subscribe-btn:hover {
+  background: var(--color-gray);
+}
+
+.contact-link {
+  color: var(--color-black);
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.6;
+}
+
+.postlude-footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-gray);
+}

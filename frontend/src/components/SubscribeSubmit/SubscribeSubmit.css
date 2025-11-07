@@ -10,7 +10,6 @@
   padding: 1rem 6rem 1rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--color-gray);
-  border-radius: 8px;
   outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
@@ -23,25 +22,7 @@
 .email-input button {
   position: absolute;
   right: 0.75rem;
-  top: 0.6rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-ivory);
-  background-color: var(--color-black);
-  color: var(--color-ivory);
-  border-radius: 2px;
-  cursor: pointer;
-	transform: scale(1, 1);
-  transition: background-color 0.25s, color 0.25s, border 0.25s, transform 0.25s;
-}
-
-.email-input button:hover {
-  background-color: var(--color-ivory);
-	color: var(--color-black);
-	border: 1px solid var(--color-black);
-}
-
-.email-input button:active {
-  transform: scale(0.75, 0.75);
+  top: 0.5rem;
 }
 
 .submit-message {

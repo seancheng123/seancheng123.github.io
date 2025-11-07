@@ -2,6 +2,7 @@
   transform: translateY(-100vh);
   will-change: transform;
     pointer-events: none;
+    transform-style: preserve-3d;
 }
 
 .animated-key > * {

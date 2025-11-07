@@ -1,0 +1,20 @@
+.black-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  background-color: var(--color-black);
+  color: var(--color-ivory);
+  cursor: pointer;
+	transform: scale(1);
+  transition: background-color 0.25s, color 0.25s, border 0.25s, transform 0.25s;
+  font-size: 1rem;
+}
+
+.black-button:hover {
+  background-color: var(--color-ivory);
+	color: var(--color-black);
+	border: 1px solid var(--color-black);
+}
+
+.black-button:active {
+  transform: scale(0.75, 0.75);
+}

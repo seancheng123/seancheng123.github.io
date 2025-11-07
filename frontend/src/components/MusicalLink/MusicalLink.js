@@ -4,16 +4,16 @@ import './MusicalLink.css';
 export default function MusicalLink({ href, children, className = '' }) {
   const linkRef = useRef();
 
-  const handleMouseEnter = () => {
+  const handleClick = () => {
     const link = linkRef.current;
     const MAX_NOTES = 50;
-    const liveNotes = document.querySelectorAll(".floating-note").length;
+    const liveNotes = document.querySelectorAll(".flying-note").length;
 
     if (liveNotes >= MAX_NOTES) return;
 
     for (let i = 0; i < 1; i++) {
       const note = document.createElement('span');
-      note.className = 'floating-note';
+      note.className = 'flying-note';
 
       const inner = document.createElement('span');
       inner.className = 'sway-wrapper';
@@ -44,7 +44,7 @@ export default function MusicalLink({ href, children, className = '' }) {
       href={href}
       ref={linkRef}
       className={`musical-link ${className}`}
-      onMouseEnter={handleMouseEnter}
+      onClick={handleClick}
     >
       {children}
     </a>

@@ -1,48 +1,51 @@
-import "./Navbar.css";
-import { useState, useEffect } from 'react';
-import MusicalLink from "../../components/MusicalLink/MusicalLink";
+import "./NavBar.css";
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-export default function Navbar() {
+export default function NavBar({ toggleOpen }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
+  
+  const lastScrollYRef = useRef(0); 
+  
+  const handleScroll = useCallback(() => {
+      const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) { 
+          setShow(false);
+      } 
+      else {
+          setShow(true);
+      }
+      
+      lastScrollYRef.current = currentScrollY; 
+      
+  }, []); 
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 1) {
-        setShow(true);
-      } else {
-        setShow(false);
-      }
-    };
+      window.addEventListener("scroll", handleScroll);
+      
+      return () => window.removeEventListener("scroll", handleScroll);
+      
+  }, [handleScroll]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleMenu = () => {
+  const toggleHamburger = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className={`navbar ${show ? "visible" : ""}`}>
-      <MusicalLink className="logo underline-animate" href="/">sean cheng</MusicalLink>
+    <nav className={`nav-bar ${show ? "visible" : ""}`}>
       <button
         className={`hamburger ${isOpen ? "open" : ""}`}
-        onClick={toggleMenu}
+        onClick={() => {
+          toggleHamburger();
+          toggleOpen();
+        }}
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
-
-      <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-        <li><MusicalLink className="underline-animate" href="/">The Foyer</MusicalLink></li>
-        <li><MusicalLink className="underline-animate" href="/notes">Program Notes</MusicalLink></li>
-        <li><MusicalLink className="underline-animate" href="/reveries">Romantic Reveries</MusicalLink></li>
-        <li><MusicalLink className="underline-animate" href="/letters">Limelight Letters</MusicalLink></li>
-        <li><MusicalLink className="underline-animate" href="/repertoire">Repertoire</MusicalLink></li>
-        <li><MusicalLink className="underline-animate" href="/postlude">Postlude</MusicalLink></li>
-      </ul>
     </nav>
   );
 }

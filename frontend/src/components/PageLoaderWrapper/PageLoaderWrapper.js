@@ -17,10 +17,11 @@ export default function PageLoaderWrapper({ children }) {
 
   return (
     <>
-      {loading && <LoadingScreen />}
-      <div style={{ display: loading ? 'none' : 'block' }}>
-        {children}
-      </div>
+      {loading ? 
+        <LoadingScreen /> 
+        :
+        children
+      }
     </>
   );
 }

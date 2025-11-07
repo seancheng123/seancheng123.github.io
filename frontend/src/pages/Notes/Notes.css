@@ -1,6 +1,6 @@
 .notes {
 	position: relative;
-	margin-top: 7rem;
+	padding: 8rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -11,29 +11,26 @@
 }
 
 .about {
-	padding: 2rem;
 	margin: auto;
 	min-height: 100vh;
 	max-width: 100rem;
 	display: flex;
-	gap: 14rem;
+	gap: 4rem;
 	justify-content: space-around;
 }
 
 .about-text {
 	width: 50%;
-	margin-top: 7rem;
+	margin-top: 4rem;
 }
 
-.about-title {
+.about-text h1 {
 	font-size: 6rem;
-	letter-spacing: -0.2rem;
 	font-family: 'Nepomuk', serif;
 }
 
 .about-bio {
-	margin-left: 11rem;
-	margin-top: 7rem;
+	margin-top: 4rem;
 }
 
 .about-portrait {
@@ -48,13 +45,14 @@
 		gap: 2rem;
 	}
 
-	.about-title {
+	
+	.about-text h1 {
 		font-size: 4rem;
 	}
 
 	.about-bio {
 		margin-left: 0;
-		margin-top: 3rem;
+		margin-top: 2rem;
 	}
 }
 
@@ -68,13 +66,13 @@
 		margin-top: 0;
 	}
 
-	.about-title {
-		font-size: 4rem;
+	.about-text h1 {
+		font-size: 3rem;
 	}
 
 	.about-bio {
 		margin-left: 0;
-		margin-top: 3rem;
+		margin-top: 2rem;
 	}
 
 	.about-portrait {
@@ -82,45 +80,42 @@
 	}
 }
 
-.program-section {
-	min-height: 100vh;
-	position: relative;
+.program-transition {
 	display: flex;
+	justify-content: space-around;
+	min-height: 200vh;
 	align-items: center;
-	gap: 2rem;
-	margin: 8rem 2rem;
-	justify-content: center;
-}
-
-.program-scroll {
-	overflow-x: auto;
 }
 
 .program-shadow {
-	padding: 2rem;
-	width: 41rem;
+	position: sticky;
+	align-self: flex-start;
+	top: 6rem;
+	height: 80vh;
 	aspect-ratio: 3/4;
 	box-sizing: border-box;
 	display: inline-flex;
+	overflow: visible;
+	box-shadow: 0 0 8px var(--color-gray);
+	overflow: scroll;
+	background-color: white;
 }
 
 .program {
 	text-align: center;
-	padding: 2rem;
-	background-color: white;
-	box-shadow: 0 0 8px var(--color-gray);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	padding: 2rem;
+	gap: 2rem;
 }
 
 .program p {
 	font-family: 'Nepomuk', serif;
 	letter-spacing: 0.05rem;
-	padding: 0 2rem;
 }
 
-.program h1 {
+.program h2 {
 	font-size: 2rem;
 }
 
@@ -139,6 +134,7 @@
 .row {
 	display: flex;
 	justify-content: space-between;
+	gap: 1rem;
 }
 
 .left-text {
@@ -157,67 +153,116 @@
 }
 
 .all-notes {
+	margin-top: 8rem;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	max-width: 100rem;
+	gap: 8rem;
+}
+
+.program-note-row {
+	display: flex;
 	gap: 4rem;
-	width: 50%;
+	justify-content: space-evenly;
+}
+
+.program-note-row:nth-child(odd) .note h2 {
+	font-weight: bold;
+	font-size: 6rem;
+	text-align: left;
+}
+
+.program-note-row:nth-child(even) .note h2 {
+	font-weight: bold;
+	font-size: 6rem;
+	text-align: right;
+}
+
+
+.program-note-row-img {
+	width: 40%;
+	aspect-ratio: 1;
+	overflow: hidden;
+	align-self: flex-start;
 }
 
 .note {
-	width: 75%;
-	max-width: 41rem;
+	width: 40%;
+	padding-top: 4rem;
 }
 
-.all-notes div:nth-child(even) {
-	margin-left: 25%;
+.note b {
+	font-size: 1.5rem;
+	font-family: 'Nepomuk', serif;
 }
 
-.all-notes div:nth-child(odd) {
-	margin-right: 25%;
+.program-note-text {
+	margin-top: 4rem;
 }
 
 @media (max-width: 80rem) {
-	.program-section {
-		flex-direction: column-reverse;
+	.program-shadow {
+		align-self: auto;
+		position: static;
+		top: 0;
+		height: 44rem;
+		width: min(100%, 34rem);
 	}
 
-	.all-notes {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		width: 100%;
-		align-items: normal;
+	.program-notes-title {
+		font-size: 5rem;
+	}
+
+	.program-note-text {
+		margin-top: 2rem;
+	}
+
+	.program-note-row:nth-child(odd) .note h2 {
+		font-size: 4rem;
+	}
+
+	.program-note-row:nth-child(even) .note h2 {
+		font-size: 4rem;
+	}
+}
+
+@media (max-width: 50rem) {
+	.program-notes-title {
+		font-size: 2rem;
+	}
+
+	.program-note-row {
+		flex-direction: column;
+		gap: 2rem;
 	}
 
 	.note {
 		width: 100%;
 	}
 
-	.all-notes div:nth-child(even) {
-		margin-left: 0%;
-	}
-
-	.all-notes div:nth-child(odd) {
-		margin-right: 0%;
-	}
-
-	.program-notes-title {
-		font-size: 5rem;
-	}
-}
-
-@media (max-width: 50rem) {
-	.program-section {
-		align-items: normal;
-	}
-
-	.program-notes-title {
-		font-size: 3rem;
-	}
-
-	.all-notes {
-		display: grid;
-		grid-template-columns: 1fr;
+	.program-note-row-img {
 		width: 100%;
+	}
+
+	.program-note-row:nth-child(odd) {
+		flex-direction: column-reverse;
+	}
+
+	.note {
+		padding: 0;
+	}
+
+	.program-note-row:nth-child(odd) .note h2 {
+		font-size: 3rem;
+		text-align: left;
+	}
+
+	.program-note-row:nth-child(even) .note h2 {
+		font-size: 3rem;
+		text-align: left;
 	}
 }

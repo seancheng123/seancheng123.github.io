@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button/Button"
 import "./SubscribeSubmit.css";
 
 export default function SubscribeSubmit() {
@@ -19,7 +20,8 @@ export default function SubscribeSubmit() {
   return (
     <div className="email-input">
 			<input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={submitted} />
-			<button onClick={handleSubmit}>Submit</button>
+			<Button onClick={handleSubmit}>Submit</Button>
+
 			{submitted && <div class="submit-message">Submitted!</div>}
     </div>
   );

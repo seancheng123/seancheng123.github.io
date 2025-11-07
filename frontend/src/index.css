@@ -25,8 +25,10 @@
 :root {
   --color-ivory: #FEFEFA;      /* Ivory background */
   --color-black: #1A1A1A;      /* Black for text */
-  --color-gray: #A3A3A3;       /* Neutral gray */
-  --color-muted: #6B6B6B;
+  --color-gray: #999999;       /* Neutral gray */
+  --color-muted: #808080;
+  --color-gray-light: #e6e6e6;
+  --color-line: #bfbfbf;
 }
 
 body {
@@ -46,7 +48,7 @@ select {
   font-family: 'Inter', sans-serif;
 }
 
-h1 {
+h1, h2 {
   font-weight: normal;
   margin: 0;
   padding: 0;
@@ -68,6 +70,14 @@ a {
   position: relative;
   transition: transform 0.5s ease;
   overflow: visible;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-gray);
+  transition: color 0.5s ease;
+}
+
+.underline-animate:hover {
+  color: var(--color-black);
 }
 
 .underline-animate::after {
@@ -80,7 +90,7 @@ a {
   background-color: var(--color-black);
 
   transform: scaleX(0) ;
-  transform-origin: center;
+  transform-origin: left;
   transition: transform 0.5s ease;
   will-change: transform;
 }
