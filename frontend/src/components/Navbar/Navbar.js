@@ -37,7 +37,8 @@ export default function NavBar({ toggleOpen }) {
     <nav className={`nav-bar ${show ? "visible" : ""}`}>
       <button
         className={`hamburger ${isOpen ? "open" : ""}`}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           toggleHamburger();
           toggleOpen();
         }}

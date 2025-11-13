@@ -179,8 +179,8 @@ export default function Posts() {
 				
 				
 				<div className="all-header">
-						<h1>View All Posts</h1>
 						<AnimatedLine delay={0.25}/>
+						<h1>View All Posts</h1>
 					</div>
 
 					<RevealSection delay={.75} duration={.75}>
@@ -196,37 +196,62 @@ export default function Posts() {
 
 function PostFilter() {
   const tags = ["romantic reveries", "personal", "limelight letters", "repertoire update"];
+	const [searchOptions, setSearchOptions] = useState(false);
+	const [filterOptions, setFilterOptions] = useState(false);
+	const [sortOptions, setSortOptions] = useState(false);
 
   return (
     <div className="post-filter">
-      <div className="filter-group">
-        <h2>Search Posts</h2>
-        <input
-          type="text"
-          placeholder="Search by title or caption..."
-          className="search-input"
-        />
+			<div className="filter-group">
+				<AnimatedLine delay={.25}/>
+        <div className="filter-row">
+					<h2>SORT</h2>
+					<button className={`show-more-button ${sortOptions ? 'open' : ''}`} onClick={() => setSortOptions(!sortOptions)}>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+        <div className={`filter-options ${sortOptions ? 'open' : ''}`}>
+					<p className="underline-animate">Date: Newest First</p>
+					<p className="underline-animate">Date: Oldest First</p>
+					<p className="underline-animate">Title: A → Z</p>
+					<p className="underline-animate">TItle: Z → A</p>
+				</div>
       </div>
-
+			
       <div className="filter-group">
-        <h2>Filter by Tag</h2>
-        <div className="tag-options">
+				<AnimatedLine delay={.25}/>
+        <div className="filter-row">
+					<h2>FILTER</h2>
+					<button className={`show-more-button ${filterOptions ? 'open' : ''}`} onClick={() => setFilterOptions(!filterOptions)}>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+        <div className={`filter-options ${filterOptions ? 'open' : ''}`}>
           {tags.map((tag, idx) => (
-            <button key={idx} className="tag-button">
-              {tag}
-            </button>
+            <p className="underline-animate">{tag}</p>
           ))}
         </div>
       </div>
 
-      <div className="filter-group">
-        <h2>Sort by</h2>
-        <select className="sort-select">
-          <option value="date-desc">Date: Newest First</option>
-          <option value="date-asc">Date: Oldest First</option>
-          <option value="title-asc">Title: A → Z</option>
-          <option value="title-desc">Title: Z → A</option>
-        </select>
+			<div className="filter-group">
+				<AnimatedLine delay={.25}/>
+				<div className="filter-row">
+					<h2>SEARCH</h2>
+					<button className={`show-more-button ${searchOptions ? 'open' : ''}`} onClick={() => setSearchOptions(!searchOptions)}>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+				
+				<div className={`search-input-container ${searchOptions ? 'open' : ''}`}>
+					<input
+						type="text"
+						placeholder="Search by title or caption..."
+						className="search-input"
+					/>
+				</div>
       </div>
 
       <div className="filter-actions">

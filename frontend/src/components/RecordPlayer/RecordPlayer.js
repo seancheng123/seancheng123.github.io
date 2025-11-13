@@ -1,18 +1,22 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, useGLTF, } from "@react-three/drei";
+import { Environment, OrbitControls, useGLTF, Preload, Html} from "@react-three/drei";
 import RecordPlayerModel from "../../assets/record-player-copy.glb";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import gsap from 'gsap';
 import * as THREE from 'three';
+import { Perf } from 'r3f-perf';
 
 
-function Models({ url, setAnimatedParts, setScene }) {
+function Models({ url, setAnimatedParts}) {
   const { scene } = useGLTF(url);
 	
 	const clonedParts = useMemo(() => {
 		let animatedParts = {};
 
 		scene.traverse((child) => {
+			child.castShadow = true;
+			child.receiveShadow = true;
 			if (child.name === "RecordDisk") {
 				animatedParts["RecordDisk"] = child.clone();
 				child.visible = false;
@@ -22,12 +26,12 @@ function Models({ url, setAnimatedParts, setScene }) {
 				child.visible = false;
 
 				animatedParts["Arm"].traverse((subChild) => {
-					if (subChild.name === "Circle007") {
-						animatedParts["Circle007"] = subChild;
+					if (subChild.name === "Needle") {
+						animatedParts["Needle"] = subChild;
 					}
 			});
 			}
-			if (child.name === "Circle007") {
+			if (child.name === "Needle") {
 				child.visible = false;
 			}
 			if (child.name === "Lever") {
@@ -43,24 +47,22 @@ function Models({ url, setAnimatedParts, setScene }) {
 				child.visible = false;
 			}
 
-			if (child.isMesh) {
-				child.castShadow = true;
-			}
 
 			console.log(child.name);
 		});
 
 		return animatedParts;
-	}, [scene]);
+	}, []);
 
 	useEffect(() => {
     setAnimatedParts(clonedParts);
-		setScene(scene);
-  }, [clonedParts, setAnimatedParts, setScene]); 
+  }, [clonedParts]);
 
   return (
 		<group>
       <primitive object={scene} />
+			<Perf position="top-left" />
+
     </group>
 	);
 }
@@ -81,16 +83,14 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 1.4,
           z: -0.25,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => camera.updateProjectionMatrix(),
+          ease: 'power1.out',
         })
         .to(controlsRef.current.target, {
           x: 0,
           y: 0.75,
           z: 0,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => controlsRef.current.update(),
+          ease: 'power1.out',
         }, 0);
       } 
 			else if (displaySelected) {
@@ -99,16 +99,14 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 2,
           z: -2.5,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => camera.updateProjectionMatrix(),
+          ease: 'power1.out',
         })
         .to(controlsRef.current.target, {
           x: -2.5,
           y: 0,
           z: -2.5,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => controlsRef.current.update(),
+          ease: 'power1.out',
         }, 0);
 			}
 			else {
@@ -117,16 +115,14 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 2,
           z: -3,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => camera.updateProjectionMatrix(),
+          ease: 'power1.out',
         })
         .to(controlsRef.current.target, {
           x: -1,
           y: 1,
           z: -1,
           duration: 1.5,
-          ease: 'power2.inOut',
-          onUpdate: () => controlsRef.current.update(),
+          ease: 'power1.out',
         }, 0);
       }
 
@@ -145,15 +141,13 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
     }
 
     return () => clearTimeout(timeout);
-  }, [playerSelected, camera, controlsRef, delay, displaySelected]);
+  }, [playerSelected, displaySelected]);
 
   return null;
 }
 
 
 export default function LandingScene() {
-	const [scene, setScene] = useState(null);
-
 	const controlsRef = useRef();
 
 	const [animatedParts, setAnimatedParts] = useState({});
@@ -174,14 +168,15 @@ export default function LandingScene() {
 
 	useEffect(() => {
 		const tl = gsap.timeline();
-		if (animatedParts["Arm"] && animatedParts["Circle007"]) {
-			if (playing) {
-				tl.to(animatedParts["Arm"].rotation, {
+		if (animatedParts["Arm"] && animatedParts["Needle"]) {
+			if (playing && playerSelected) {
+				tl
+				.to(animatedParts["Arm"].rotation, {
 					y: 0,
 					duration: 1,
 					ease: 'power1.inOut',
 				})
-				.to(animatedParts["Circle007"].rotation, {
+				.to(animatedParts["Needle"].rotation, {
 					x: 0,
 					y: 0,
 					z: 0,
@@ -196,7 +191,8 @@ export default function LandingScene() {
 				}, 0);
 			}
 			else {
-				tl.to(animatedParts["Circle007"].rotation, {
+				tl
+				.to(animatedParts["Needle"].rotation, {
 					x: Math.PI / 7,
 					y: .1,
 					z: .4,
@@ -209,186 +205,196 @@ export default function LandingScene() {
 					ease: 'power1.inOut',
 				}, 0.5)
 				
-				
 				gsap.killTweensOf(animatedParts["RecordDisk"].rotation);
 			}
+
 		}
-		return () => {
-			if (tl) tl.kill();
-		};
-	}, [playing, animatedParts]);
+		return () => { if (tl) tl.kill(); };
+	}, [playing, animatedParts["Arm"], animatedParts["Needle"], animatedParts["RecordDisk"]]);
 
 	useEffect(() => {
 		const tl = gsap.timeline();
 		if (animatedParts["RecordDisk"]) {
 			if (!side && !playing) {
-				tl.to(animatedParts["RecordDisk"].position, {
-					y: "+=0.4",
+				tl
+				.to(animatedParts["RecordDisk"].position, {
+					y: 1.1,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				})
 				.to(animatedParts["RecordDisk"].rotation, {
-					x: animatedParts["RecordDisk"].rotation.x + Math.PI,
+					x: Math.PI,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				}, 0.5)
 				.to(animatedParts["RecordDisk"].position, {
-					y: "-=0.4",
+					y: 0.66,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				}, 1)
 			}
 			else if (side && !playing) {
-				tl.to(animatedParts["RecordDisk"].position, {
-					y: "+=0.4",
+				tl
+				.to(animatedParts["RecordDisk"].position, {
+					y: 1.1,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				})
 				.to(animatedParts["RecordDisk"].rotation, {
-					x: animatedParts["RecordDisk"].rotation.x - Math.PI,
+					x: 0,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				}, 0.5)
 				.to(animatedParts["RecordDisk"].position, {
-					y: "-=0.4",
+					y: 0.66,
 					duration: 0.5,
 					ease: 'power1.inOut'
 				}, 1)
 			}
 		}
 
-		return () => {
-			if (tl) tl.kill();
-		};
-	}, [side, animatedParts]);
+		return () => { if (tl) tl.kill(); };
+	}, [side, animatedParts["RecordDisk"]]);
 
 	function selectDisk() {
 		if (!playerSelected) {
 			setPlayerSelected(true);
+			setDisplaySelected(false);
 		}
 		else {
 			setSide(!side);
 		}
 	}
 
-	
-
 
   return (
     <Canvas
       shadows
-      camera={{ position: [0, 2, -1], fov: 50 }}
+      camera={{ position: [-1, 2, -2], fov: 50 }}
       style={{ width: "100vw", height: "100vh" }}
     >
-			<Environment preset="apartment"/>
-			
-      <ambientLight intensity={0.5} />
-			<pointLight
-				position={[3, 6, 0]}
-				intensity={20}
-				distance={20}
-				decay={1}
-				castShadow
-				shadow-mapSize={[2048, 2048]}
-				shadow-bias={0.01} 
-			/>
+			<Suspense fallback={<Html position={[-1,2,-2]}><LoadingScreen /></Html>}>
+				<Environment 
+					preset="apartment"
+					background={false}
+					blur={0} // Add a slight blur to soften the reflections/lighting
+					environmentIntensity={1} // Adjust the brightness of the environment light
+				/>
+				
+				<ambientLight intensity={0.5} />
+				<pointLight 
+					position={[2, 3, -2]} 
+					intensity={30} 
+					distance={10}
+					decay={2}
+					castShadow
+					shadow-mapSize-width={1024}     // Higher resolution for better detail
+  				shadow-mapSize-height={1024}
+					shadow-bias={-0.001}
+				/>
+				
 
-      <Suspense fallback={null}>
-        <Models url={RecordPlayerModel} setAnimatedParts={setAnimatedParts} setScene={setScene}/>
+				
+				<Models url={RecordPlayerModel} setAnimatedParts={setAnimatedParts}/>
 				{animatedParts["RecordDisk"] && <primitive object={animatedParts["RecordDisk"]} onClick={(e) => {e.stopPropagation(); selectDisk()}}/>}
 				{animatedParts["Arm"] && <primitive object={animatedParts["Arm"]} onClick={(e) => {e.stopPropagation(); setPlaying(!playing)}}/>}
 				{animatedParts["Lever"] && <primitive object={animatedParts["Lever"]} onClick={(e) => {e.stopPropagation(); spinLever()}}/>}
-				{animatedParts["AlbumDisplay"] && <primitive object={animatedParts["AlbumDisplay"]} onClick={(e) => {e.stopPropagation(); setDisplaySelected(true)}}/>}
-				{animatedParts["Album1"] && <AlbumHover album={animatedParts["Album1"]} />}
-      </Suspense>
+				{animatedParts["AlbumDisplay"] && <primitive object={animatedParts["AlbumDisplay"]} onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(true)}}/>}
+				{animatedParts["Album1"] && <AlbumModel album={animatedParts["Album1"]} displaySelected={displaySelected} setDisplaySelected={setDisplaySelected}/>}
+				
 
-			<OrbitControls 
-				ref={controlsRef}
-				target={[-2, 2, -1]}
-				enableDamping
-        ampingFactor={0.1}
-				enablePan={true}
-				enableZoom={true}
-				enableRotate={true}
-			/>
-			<CameraController controlsRef={controlsRef} delay={1000} playerSelected={playerSelected} displaySelected={displaySelected}/>
+				<OrbitControls 
+					ref={controlsRef}
+					target={[-2, 2, -2]}
+					enableDamping
+					dampingFactor={0.1}
+					enablePan={true}
+					enableZoom={true}
+					enableRotate={true}
+				/>
+				<CameraController controlsRef={controlsRef} delay={3000} playerSelected={playerSelected} displaySelected={displaySelected}/>
 
-			<mesh 
-				rotation={[-Math.PI / 2, 0, 0]}
-				position={[4, 0, -6]}
-				receiveShadow
-				onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
-			>
-				<planeGeometry args={[16, 16]} />
-				<meshStandardMaterial color="white" />
-			</mesh>
-			<mesh 
-				rotation={[0, Math.PI/2, 0]}
-				position={[-3.01, 8, -6]}
-				receiveShadow
-				onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
-			>
-				<planeGeometry args={[16, 16]} />
-				<meshStandardMaterial color="white" />
-			</mesh>
-			<mesh 
-				rotation={[0, Math.PI, 0]}
-				position={[4, 8, 2]}
-				receiveShadow
-				onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
-			>
-				<planeGeometry args={[16, 16]} />
-				<meshStandardMaterial color="white" />
-			</mesh>    
+				<mesh 
+					rotation={[-Math.PI / 2, 0, 0]}
+					position={[4, 0, -6]}
+					receiveShadow
+					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
+				>
+					<planeGeometry args={[16, 16]} />
+					<meshStandardMaterial color="white" />
+				</mesh>
+				<mesh 
+					rotation={[0, Math.PI/2, 0]}
+					position={[-3.01, 8, -6]}
+					receiveShadow
+					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
+				>
+					<planeGeometry args={[16, 16]} />
+					<meshStandardMaterial color="white" />
+				</mesh>
+				<mesh 
+					rotation={[0, Math.PI, 0]}
+					position={[4, 8, 2]}
+					receiveShadow
+					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
+				>
+					<planeGeometry args={[16, 16]} />
+					<meshStandardMaterial color="white" />
+				</mesh>
+				<Preload all/>
+			</Suspense>
     </Canvas>
   );
 }
 
-function AlbumHover({ album }) {
+function AlbumModel({ album, displaySelected, setDisplaySelected }) {
   const { pointer, camera, scene } = useThree();
   const hover = useRef(false);
-  const ref = useRef();
+  const ref = useRef(album); // Refers to the album 3d object
+  
+	const selected = useRef(false);
+
   const originalRotation = useRef(new THREE.Euler());
+	originalRotation.current.copy(album.rotation);
+
   const plane = new THREE.Plane();
   const raycaster = new THREE.Raycaster();
   const intersection = new THREE.Vector3();
   const targetQuat = new THREE.Quaternion();
 
-  useEffect(() => {
-    if (album) {
-      ref.current = album;
-      originalRotation.current.copy(album.rotation);
-    }
-  }, [album]);
-
   useFrame(() => {
     const mesh = ref.current;
-    if (!mesh) return;
+    if (!displaySelected || !selected.current || !mesh) return;
+		const temp = new THREE.Object3D();
 
-    if (hover.current) {
+    if (hover.current && displaySelected && selected.current) {
       const albumWorldPos = mesh.getWorldPosition(new THREE.Vector3());
       const cameraDir = new THREE.Vector3();
       camera.getWorldDirection(cameraDir);
-      plane.setFromNormalAndCoplanarPoint(cameraDir, albumWorldPos);
+
+	  	const offset = 0.4;
+			const planePos = albumWorldPos.clone().add(cameraDir.clone().multiplyScalar(-offset));
+      plane.setFromNormalAndCoplanarPoint(cameraDir, planePos);
 
       raycaster.setFromCamera(pointer, camera);
       raycaster.ray.intersectPlane(plane, intersection);
-
-      intersection.lerp(albumWorldPos, 0.9);
-
-      mesh.lookAt(intersection);
-			mesh.rotateY(-Math.PI / 2);
-      targetQuat.copy(mesh.quaternion);
+			
+			temp.position.copy(mesh.position);
+			temp.lookAt(intersection);
+			temp.rotateY(-Math.PI / 2);
+      targetQuat.copy(temp.quaternion);
 
     } else if (!mesh.userData.isDetached) {
-      mesh.rotation.copy(originalRotation.current);
-      targetQuat.copy(mesh.quaternion);
+			const originalQuat = new THREE.Quaternion().setFromEuler(originalRotation.current);
+      targetQuat.copy(originalQuat);
     }
+
+		mesh.quaternion.slerp(targetQuat, 0.05);
 
   });
 
-  function handleAlbumClick(album, scene) {
-    if (!album) return;
+  function handleAlbumClick() {
+    if (!album || !displaySelected) return;
 
     if (!album.userData.savedWorld) {
       album.userData.savedWorld = {
@@ -398,22 +404,57 @@ function AlbumHover({ album }) {
       };
 
       scene.attach(album);
-      album.position.set(-0.75, 1, -2.5);
+			gsap.to(album.position, {
+				duration: 0.75,
+				ease: 'power1.inOut',
+				x: -.25,
+				y: 1.25,
+				z: -2.5
+			});
+			selected.current = true;
     } else {
-      const { position, rotation, parent } = album.userData.savedWorld;
-      parent.attach(album);
-      album.position.copy(album.parent.worldToLocal(position.clone()));
-      album.quaternion.copy(rotation);
-      delete album.userData.savedWorld;
+      putBackAlbum(album)
     }
   }
+
+	function putBackAlbum() {
+		if (album.userData.savedWorld) {
+			const { position, rotation, parent } = album.userData.savedWorld;
+
+			parent.attach(album);
+			const originalPosition = album.parent.worldToLocal(position.clone());
+
+			gsap.to(album.position, {
+				duration: 0.75,
+				ease: 'power1.inOut',
+				x: originalPosition.x,
+				y: originalPosition.y,
+				z: originalPosition.z
+			});
+
+			gsap.to(album.rotation, {
+				duration: 0.75,
+				ease: 'power1.inOut',
+				x: rotation.x,
+				y: rotation.y,
+				z: rotation.z
+			});
+
+			delete album.userData.savedWorld;
+			selected.current = false;
+		}
+	}
+
+	useEffect(() => {
+		putBackAlbum();
+	}, [displaySelected]);
 
   return (
     <primitive
       object={album}
       onPointerOver={() => (hover.current = true)}
       onPointerOut={() => (hover.current = false)}
-      onClick={(e) => { e.stopPropagation(); handleAlbumClick(album, scene); }}
+      onClick={(e) => { e.stopPropagation(); setDisplaySelected(true); handleAlbumClick(); }}
     />
   );
 }

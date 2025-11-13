@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import PageLoaderWrapper from "./components/PageLoaderWrapper/PageLoaderWrapper";
 import NavBar from "./components/NavBar/NavBar";
 import NavScreen from "./components/NavScreen/NavScreen";
 import Footer from "./components/Footer/Footer";
@@ -26,16 +25,13 @@ function App() {
     <Router>
       <NavBar toggleOpen={() => setNavScreenOpen(!navScreenOpen)}/>
       <NavScreen isOpen={navScreenOpen}/>
-      <PageLoaderWrapper>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/notes" element={<Notes />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/repertoire" element={<Repertoire />} />
-          <Route path="/postlude" element={<Postlude />} />
-        </Routes>
-      </PageLoaderWrapper>
-      <Footer/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/repertoire" element={<Repertoire />} />
+        <Route path="/postlude" element={<Postlude />} />
+      </Routes>
     </Router>
   );
 }

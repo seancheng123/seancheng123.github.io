@@ -22,6 +22,19 @@
   font-style: normal;
 }
 
+html {
+  overscroll-behavior-y: none;
+  -ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+
+html::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 :root {
   --color-ivory: #FEFEFA;      /* Ivory background */
   --color-black: #1A1A1A;      /* Black for text */
@@ -29,6 +42,7 @@
   --color-muted: #808080;
   --color-gray-light: #e6e6e6;
   --color-line: #bfbfbf;
+  interpolate-size: allow-keywords;
 }
 
 body {
@@ -38,8 +52,10 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif
 }
+
+
 
 input,
 textarea,
