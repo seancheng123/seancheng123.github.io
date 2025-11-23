@@ -1,13 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.b14a8247.css",
-    "main.js": "/static/js/main.67c304da.js",
+    "main.css": "/static/css/main.353dfd1a.css",
+    "main.js": "/static/js/main.7ce9515f.js",
     "static/js/453.d7446e4a.chunk.js": "/static/js/453.d7446e4a.chunk.js",
-    "static/media/background-piano.jpg": "/static/media/background-piano.1439ad8f25de5eb3fd36.jpg",
-    "static/media/carnegie.jpg": "/static/media/carnegie.20ab7393a95f5caec3dd.jpg",
+    "static/media/portrait.png": "/static/media/portrait.908ce377a56d9e32d209.png",
+    "static/media/sky.jpg": "/static/media/sky.8ecb575580677119eeac.jpg",
+    "static/media/record-player-copy.glb": "/static/media/record-player-copy.db4acb0f8373899fa9c3.glb",
+    "static/media/piano_models.png": "/static/media/piano_models.bcdf71f4e8c3a488b9c4.png",
+    "static/media/stage.jpeg": "/static/media/stage.4af8df17a52dcd35fadd.jpeg",
+    "static/media/forest.exr": "/static/media/forest.0666f45311cdf9321830.exr",
+    "static/media/Inter_18pt-ExtraLight.ttf": "/static/media/Inter_18pt-ExtraLight.9c52fd6f7cd85eb278b2.ttf",
+    "static/media/book.jpg": "/static/media/book.0f5af5a4dfc5b95548b6.jpg",
+    "static/media/flower.jpg": "/static/media/flower.9ae8f14d496e796823fd.jpg",
     "static/media/rest.png": "/static/media/rest.86576046a3ca822e872c.png",
     "static/media/Nepomuk-Regular.otf": "/static/media/Nepomuk-Regular.a172fdfbb106b8054755.otf",
     "static/media/Nepomuk-Bold.otf": "/static/media/Nepomuk-Bold.0f0dcaca00a785c44819.otf",
+    "static/media/sheetmusic.jpg": "/static/media/sheetmusic.ca0668dde0170b7178fe.jpg",
     "static/media/Nepomuk-Italic.otf": "/static/media/Nepomuk-Italic.76a45c40b10aad0faffc.otf",
     "static/media/stage.svg": "/static/media/stage.4fcf6200bdecdcf4aa83379a90446317.svg",
     "static/media/books.svg": "/static/media/books.fb7259850c1339d940bd795c33ccd3bc.svg",
@@ -15,12 +23,12 @@
     "static/media/candle.svg": "/static/media/candle.7e5a3a21e30ba414afe67c87df8e4aaa.svg",
     "static/media/quill.svg": "/static/media/quill.7a93941a733a5aee86f244d8c8acd4cc.svg",
     "index.html": "/index.html",
-    "main.b14a8247.css.map": "/static/css/main.b14a8247.css.map",
-    "main.67c304da.js.map": "/static/js/main.67c304da.js.map",
+    "main.353dfd1a.css.map": "/static/css/main.353dfd1a.css.map",
+    "main.7ce9515f.js.map": "/static/js/main.7ce9515f.js.map",
     "453.d7446e4a.chunk.js.map": "/static/js/453.d7446e4a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b14a8247.css",
-    "static/js/main.67c304da.js"
+    "static/css/main.353dfd1a.css",
+    "static/js/main.7ce9515f.js"
   ]
 }
