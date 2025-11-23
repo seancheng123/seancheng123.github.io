@@ -153,42 +153,38 @@ export default function Posts() {
 					<h1>Recent Posts</h1>
 					<AnimatedLine delay={.25}/>
 				</div>
-				<RevealSection delay={.75} duration={0.75}>
-					<div className="recent-posts">
-						{!smallWindow ?
-							<div className="posts">
-								<div className="main-post">
-									<PostPreview type="main" data={postStream[0]}/>
-								</div>
-								<div className="side-posts">
-									<PostPreview type="side" data={postStream[1]}/>
-									<PostPreview type="side" data={postStream[2]}/>
-									<PostPreview type="side" data={postStream[3]}/>
-								</div>
+				<div className="recent-posts">
+					{!smallWindow ?
+						<div className="posts">
+							<div className="main-post">
+								<PostPreview type="main" data={postStream[0]}/>
 							</div>
-							:
-							<div className="small-posts">
-								<PostPreview type="card" data={postStream[0]}/>
-								<PostPreview type="card" data={postStream[1]}/>
-								<PostPreview type="card" data={postStream[2]}/>
-								<PostPreview type="card" data={postStream[3]}/>
+							<div className="side-posts">
+								<PostPreview type="side" data={postStream[1]}/>
+								<PostPreview type="side" data={postStream[2]}/>
+								<PostPreview type="side" data={postStream[3]}/>
 							</div>
-						}
-					</div>
-				</RevealSection>
+						</div>
+						:
+						<div className="small-posts">
+							<PostPreview type="card" data={postStream[0]}/>
+							<PostPreview type="card" data={postStream[1]}/>
+							<PostPreview type="card" data={postStream[2]}/>
+							<PostPreview type="card" data={postStream[3]}/>
+						</div>
+					}
+				</div>
 				
 				
 				<div className="all-header">
-						<AnimatedLine delay={0.25}/>
-						<h1>View All Posts</h1>
-					</div>
+					<AnimatedLine delay={0.25}/>
+					<h1>View All Posts</h1>
+				</div>
 
-					<RevealSection delay={.75} duration={.75}>
-						<div className="all-posts">
-							<PostFilter/>
-							<PaginatedList className="" data={postStream} pageNum={!useRemBreakpoint(60) ? 5 : 1}/>
-						</div>
-					</RevealSection>
+				<div className="all-posts">
+					<PostFilter/>
+					<PaginatedList className="" data={postStream} pageNum={!useRemBreakpoint(60) ? 5 : 1}/>
+				</div>
 
 			</div>
 	);

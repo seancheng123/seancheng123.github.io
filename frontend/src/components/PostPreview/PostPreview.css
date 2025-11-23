@@ -4,23 +4,20 @@
 	min-height: 0;
 	min-width: 0;
 	width: 100%;
-	transform: scale(1);
-	box-shadow: 0 0 2px var(--color-gray);
-	transition: transform 0.25s ease, box-shadow 0.25s ease;
-	will-change: transform, box-shadow;
-	background-color: white;
-	border-radius: 1rem;
+	transition: transform 0.25s ease, box-shadow 1s ease-in-out;
+	will-change: box-shadow;
 	overflow: hidden;
+	transform: scale(1);
+	border-radius: 0.75rem;
+	position: relative;
 }
 
 .preview-box:hover {
-	transform: scale(1.02);
 	box-shadow: 0 0 4px var(--color-gray);
 }
 
 .preview-box:active {
-	transform: scale(0.98);
-	box-shadow: none;
+	transform: scale(0.95);
 }
 
 .preview, .preview-card, .preview-min {
@@ -36,50 +33,143 @@
 	height: 100%;
 }
 
-.img-container {
+
+.preview-image-container {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 75%;
+	border-radius: 0.75rem;
+	overflow: hidden;
+	transition: height 0.5s ease-in-out;
 }
 
-.img-container-card, .img-container-min {
+.preview-image-container::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity 0.5s ease-in-out;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 100%);
+}
+
+.preview-image-container-card, .preview-image-container-min {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 60%;
+	border-radius: 0.75rem;
+	transition: height 0.5s ease-in-out;
+	overflow: hidden;
 }
 
-.img-container-side {
+
+.preview-image-container-card::before, .preview-image-container-min::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
 	height: 100%;
+	width: 100%;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity 0.5s ease-in-out;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 100%);
+}
+
+.preview-image-container-side {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 50%;
+	height: 100%;
+	border-radius: 0.75rem;
+	transition: width 0.5s ease-in-out;
+	overflow: hidden;
+}
+
+.preview-image-container-side::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity 0.5s ease-in-out;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 100%);
+}
+
+.preview-box:hover .preview-image-container, .preview-box:hover .preview-image-container-card, .preview-box:hover .preview-image-container-min  {
+	height: 100%;
+}
+
+.preview-box:hover .preview-image-container::before, .preview-box:hover .preview-image-container-card::before, .preview-box:hover .preview-image-container-min::before, .preview-box:hover .preview-image-container-side::before {
+	opacity: 1;
+}
+
+.preview-box:hover .preview-image-container-side {
+	width: 100%;
 }
 
 .preview-image {
-	object-fit: cover;
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
 }
+
 
 .preview-text {
 	width: 100%;
 	height: 25%;
-	padding: 1rem 1rem;
+	padding: 1rem;
 	box-sizing: border-box;
 	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
 }
 
 .preview-text-card, .preview-text-min {
 	width: 100%;
 	height: 40%;
-	padding: 1rem 1rem;
+	padding: 1rem;
 	box-sizing: border-box;
 	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
 }
 
 .preview-text-side {
 	width: 50%;
 	height: 100%;
-	padding: 1rem 1rem;
+	padding: 1rem;
 	box-sizing: border-box;
 	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 2;
 }
+
+.preview-box:hover .preview-image, .preview-box:hover .preview-image-card, .preview-box:hover .preview-image-min {
+	height: 100%;
+}
+
+.preview-box:hover .preview-image-side {
+	width: 100%;
+}
+
 
 .post-caption {
 	display: -webkit-box;
@@ -89,6 +179,11 @@
   overflow: hidden;
 	color: var(--color-muted);
 	margin-bottom: 1rem;
+	transition: color 0.5s ease-in-out;
+}
+
+.preview-box:hover .post-caption {
+	color: var(--color-black);
 }
 
 .preview-text h1 {
@@ -127,4 +222,9 @@
 	margin-bottom: 0.5rem;
 	color: var(--color-muted);
 	white-space: nowrap;
+	transition: color 0.5s ease-in-out;
+}
+
+.preview-box:hover .date {
+	color: var(--color-black);
 }

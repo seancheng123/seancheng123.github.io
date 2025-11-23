@@ -25,15 +25,15 @@
 }
 
 .nav-screen-img {
-    width: 150%;
+    width: 120%;
     height: 100%;
     object-fit: cover;
     transition: transform 1.5s ease;
-    transform: translateX(0);
+    transform: translateX(0%);
 }
 
 .nav-screen-img.open {
-    transform: translateX(-25%);
+    transform: translateX(-10%);
 }
 
 
@@ -55,8 +55,16 @@
     width: 80%;
 }
 
+.nav-screen-links p {
+    transition: transform 0.4s ease;
+}
+
+.nav-screen-links a:hover > p {
+    transform: translateX(3%);
+}
+
 .nav-screen-links a::after {
-    transition: transform 1s ease-in-out;
+    transition: transform 0.75s ease;
 }
 
 @media (max-width: 80rem) {

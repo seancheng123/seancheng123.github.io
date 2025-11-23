@@ -121,14 +121,8 @@
 }
 
 .page-number {
-  padding: 0.5rem 1rem;
+  padding: .5rem 1rem;
   border-radius: 0.75rem;
-}
-
-.page-number.active {
-  font-weight: bold;
-  background-color: var(--color-black);
-  color: var(--color-ivory);
 }
 
 .page-number.disabled {
@@ -164,55 +158,45 @@
 
 .show-more-button {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   width: 1rem;
   height: 1rem;
   background: none;
   border: none;
   cursor: pointer;
   margin: 0;
-  transition: transform 0.25s;
   padding: 0;
+  perspective: 100rem;
+  transition: transform 0.25s;
 }
 
 .show-more-button span {
+  position: absolute;
   display: block;
-  height: 2px;
+  height: 0.12rem;
   width: 100%;
   background-color: var(--color-black);
-  border-radius: 2px;
-  transition: transform 0.75s ease, opacity 0.75s ease;
-  transform-origin: center;
-}
-
-.show-more-button:hover {
-	transform: scale(1.25);
-}
-
-.show-more-button span:nth-child(1) {
-  transform: rotate(0deg) translate(0rem, 0.5rem);
+  border-radius: 1px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+  transform-origin: center center;
 }
 
 .show-more-button span:nth-child(2) {
-  transform: rotate(90deg) translate(-.35rem, 0rem);
+  transform: rotate(90deg);
+}
+
+.show-more-button:hover {
+  transform: scale(1.25);
 }
 
 .show-more-button.open span:nth-child(1) {
-  transform: rotate(180deg) translate(0rem, -0.5rem);
+  transform: rotate(90deg);
   opacity: 0;
 }
 
 .show-more-button.open span:nth-child(2) {
-  transform: rotate(0deg) translate(0rem, -0.5rem);
-}
-
-.show-more-button.open:hover span:nth-child(1) {
-  transform: rotate(180deg) translate(0rem, -0.5rem) scale(1.25);
-}
-
-.show-more-button.open:hover span:nth-child(2) {
-  transform: rotate(0deg) translate(0rem, -0.5rem) scale(1.25);
+  transform: rotate(180deg);
 }
 
 .filter-row {
@@ -249,12 +233,15 @@
 .filter-options {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   margin-left: 2rem;
   align-items: start;
   height: 0;
   overflow: hidden;
   transition: height 0.5s ease;
+}
+
+.filter-options p {
+	margin-bottom: 1rem;
 }
 
 .filter-options.open {

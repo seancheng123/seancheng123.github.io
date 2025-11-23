@@ -1,8 +1,10 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import "./RecordPlayer.css";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, useGLTF, Preload, Html} from "@react-three/drei";
+import { Environment, OrbitControls, useGLTF, Preload, Html } from "@react-three/drei";
 import RecordPlayerModel from "../../assets/record-player-copy.glb";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import myEnvironment from "../../assets/forest.exr";
 import gsap from 'gsap';
 import * as THREE from 'three';
 import { Perf } from 'r3f-perf';
@@ -67,7 +69,7 @@ function Models({ url, setAnimatedParts}) {
 	);
 }
 
-function CameraController({ controlsRef, delay = 2000, playerSelected, displaySelected }) {
+function CameraController({ controlsRef, delay = 2000, playerSelected, displaySelected, diskTextRef }) {
   const { camera } = useThree();
 	const hasRunOnce = useRef(false);
 
@@ -83,15 +85,24 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 1.4,
           z: -0.25,
           duration: 1.5,
-          ease: 'power1.out',
+          ease: 'power1.inOut',
         })
         .to(controlsRef.current.target, {
           x: 0,
           y: 0.75,
           z: 0,
           duration: 1.5,
-          ease: 'power1.out',
-        }, 0);
+          ease: 'power1.inOut',
+        }, 0)
+				.to(diskTextRef.current, 
+					{
+						opacity: 1,
+						duration: 1,
+						ease: 'power1.out',
+						onComplete: () => {
+							diskTextRef.current.visible = true;
+						}
+					}, 1.5);
       } 
 			else if (displaySelected) {
 				tl.to(camera.position, {
@@ -99,15 +110,24 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 2,
           z: -2.5,
           duration: 1.5,
-          ease: 'power1.out',
+          ease: 'power1.inOut',
         })
         .to(controlsRef.current.target, {
           x: -2.5,
           y: 0,
           z: -2.5,
           duration: 1.5,
-          ease: 'power1.out',
-        }, 0);
+          ease: 'power1.inOut',
+        }, 0)
+				.to(diskTextRef.current, 
+					{
+						opacity: 0,
+						duration: 1,
+						ease: 'power1.out',
+						onComplete: () => {
+							diskTextRef.current.visible = false;
+						}
+					}, 0);
 			}
 			else {
         tl.to(camera.position, {
@@ -115,15 +135,24 @@ function CameraController({ controlsRef, delay = 2000, playerSelected, displaySe
           y: 2,
           z: -3,
           duration: 1.5,
-          ease: 'power1.out',
+          ease: 'power1.inOut',
         })
         .to(controlsRef.current.target, {
           x: -1,
           y: 1,
           z: -1,
           duration: 1.5,
-          ease: 'power1.out',
-        }, 0);
+          ease: 'power1.inOut',
+        }, 0)
+				.to(diskTextRef.current, 
+					{
+						opacity: 0,
+						duration: 1,
+						ease: 'power1.out',
+						onComplete: () => {
+							diskTextRef.current.visible = false;
+						}
+					}, 0);
       }
 
 			return () => {
@@ -151,6 +180,7 @@ export default function LandingScene() {
 	const controlsRef = useRef();
 
 	const [animatedParts, setAnimatedParts] = useState({});
+	const diskTextRef = useRef(null);
 
 	const [playerSelected, setPlayerSelected] = useState(false);
 	const [playing, setPlaying] = useState(false);
@@ -272,6 +302,14 @@ export default function LandingScene() {
       shadows
       camera={{ position: [-1, 2, -2], fov: 50 }}
       style={{ width: "100vw", height: "100vh" }}
+			onCreated={(state) => {
+				state.gl.outputColorSpace = THREE.SRGBColorSpace;
+				state.gl.toneMapping = THREE.ACESFilmicToneMapping;
+				state.gl.toneMappingExposure = 1.0;
+				state.gl.physicallyCorrectLights = true;
+				state.gl.shadowMap.enabled = true;
+				state.gl.shadowMap.type = THREE.PCFSoftShadowMap;
+			}}
     >
 			<Suspense fallback={<Html position={[-1,2,-2]}><LoadingScreen /></Html>}>
 				<Environment 
@@ -281,10 +319,10 @@ export default function LandingScene() {
 					environmentIntensity={1} // Adjust the brightness of the environment light
 				/>
 				
-				<ambientLight intensity={0.5} />
+				<ambientLight intensity={0.1} />
 				<pointLight 
 					position={[2, 3, -2]} 
-					intensity={30} 
+					intensity={40} 
 					distance={10}
 					decay={2}
 					castShadow
@@ -312,35 +350,23 @@ export default function LandingScene() {
 					enableZoom={true}
 					enableRotate={true}
 				/>
-				<CameraController controlsRef={controlsRef} delay={3000} playerSelected={playerSelected} displaySelected={displaySelected}/>
+				<CameraController controlsRef={controlsRef} delay={3000} playerSelected={playerSelected} displaySelected={displaySelected} diskTextRef={diskTextRef}/>
 
-				<mesh 
-					rotation={[-Math.PI / 2, 0, 0]}
-					position={[4, 0, -6]}
-					receiveShadow
-					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
+				<Html 
+					position={[0, 1, 0.75]} 
+					rotation={[0, 0, 0]}
+					center
+					ref={diskTextRef}
+					visible={false}
 				>
-					<planeGeometry args={[16, 16]} />
-					<meshStandardMaterial color="white" />
-				</mesh>
-				<mesh 
-					rotation={[0, Math.PI/2, 0]}
-					position={[-3.01, 8, -6]}
-					receiveShadow
-					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
-				>
-					<planeGeometry args={[16, 16]} />
-					<meshStandardMaterial color="white" />
-				</mesh>
-				<mesh 
-					rotation={[0, Math.PI, 0]}
-					position={[4, 8, 2]}
-					receiveShadow
-					onClick={(e) => {e.stopPropagation(); setPlayerSelected(false); setDisplaySelected(false)}}
-				>
-					<planeGeometry args={[16, 16]} />
-					<meshStandardMaterial color="white" />
-				</mesh>
+					<div className="frosted-panel">
+						<h1 className="panel-title">Your Dynamic Title</h1>
+						<p className="panel-content">
+							This text is rendered using standard CSS and HTML. The container size will automatically adjust to fit this content unless a fixed width/height is set in the CSS.
+						</p>
+					</div>
+				</Html>
+				
 				<Preload all/>
 			</Suspense>
     </Canvas>

@@ -16,9 +16,10 @@ export default function PostPreview({ type = "main", data = {} }) {
 	return (
 		<a className="preview-box" href="/">
 			<div className={`preview${suffix}`}>
-				<div className={`img-container${suffix}`}>
+				<div className={`preview-image-container${suffix}`}>
 					<img src={data.image} alt="preview" className="preview-image" />
 				</div>
+				
 				<div className={`preview-text${suffix}`}>
 					<p className="date">{data.date}</p>
 					<h1>{data.title}</h1>

@@ -6,7 +6,8 @@ import { ReactComponent as Rose } from "../../assets/rose.svg";
 import { ReactComponent as Candle } from "../../assets/candle.svg";
 import AnimatedKey from "../../components/AnimatedKey/AnimatedKey";
 import DelayedLink from "../../components/DelayedLink/DelayedLink";
-import RecordPlayer from "../../components/RecordPlayer/RecordPlayer";
+import LandingScene from "../../components/LandingScene/LandingScene";
+import { useRef } from 'react';
 
 const notes = ["♪", "♫", "♩", "♬"];
 
@@ -27,11 +28,14 @@ export default function Home() {
     };
   };
 
+  const homeRef = useRef(null);
+
   return (
-    <div className="home-content"> 
+    <div className="home" ref={homeRef}> 
       <section className="landing">
-        <RecordPlayer/>
+        <LandingScene homeRef={homeRef}/>
       </section>
+      {/*
       <section className="piano-keys-navigation">
         <div className="piano-keys">
           <AnimatedKey delay={1}>
@@ -70,6 +74,7 @@ export default function Home() {
           </AnimatedKey>
         </div>
       </section>
+      */}
     </div>
     
   );
